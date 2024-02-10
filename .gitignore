@@ -3,6 +3,13 @@
 # OS
 .DS_Store
 
+# Log files
+*.log
+
+# VS Code
+.vscode
+
+
 # Files and directories created by pub
 .dart_tool/
 .packages
