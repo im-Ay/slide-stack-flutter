@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:slide_stack/gamelogic/shape/active_shape.dart';
 
 import 'block.dart';
 import 'map.dart';
@@ -25,5 +26,27 @@ class MapBlocks extends _$MapBlocks {
       }, growable: false),
       growable: false,
     );
+  }
+
+  stackShape() {
+    var shape = ref.read(activeShapeProvider);
+    if (shape == null) {
+      return;
+    }
+
+    state = state.map((row) {
+      return row.map((block) {
+        var shapeIndex = shape.blocks.indexWhere((shapeBlock) =>
+            ((shapeBlock.rowIndex == 0 && block.rowIndex == 0) ||
+                shapeBlock.rowIndex == block.rowIndex + 1) &&
+            shapeBlock.columnIndex == block.columnIndex);
+
+        if (shapeIndex != -1) {
+          return Block.fromBlock(shape.blocks.elementAt(shapeIndex));
+        }
+
+        return block;
+      }).toList(growable: false);
+    }).toList(growable: false);
   }
 }
