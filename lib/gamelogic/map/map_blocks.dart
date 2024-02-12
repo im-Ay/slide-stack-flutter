@@ -16,13 +16,12 @@ class MapBlocks extends _$MapBlocks {
       (ri) => List.generate(gameMap.columnCount, (ci) {
         var dataIndex = gameMap.predefinedBlocks.indexWhere(
             (block) => block.columnIndex == ci && block.rowIndex == ri);
-        return Block(
-          columnIndex: ci,
-          rowIndex: ri,
-          data: dataIndex == -1
-              ? null
-              : gameMap.predefinedBlocks.elementAt(dataIndex),
-        );
+
+        if (dataIndex == -1) {
+          return Block(columnIndex: ci, rowIndex: ri);
+        } else {
+          return Block.fromBlock(gameMap.predefinedBlocks.elementAt(dataIndex));
+        }
       }, growable: false),
       growable: false,
     );

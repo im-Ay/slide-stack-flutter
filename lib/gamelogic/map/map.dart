@@ -30,7 +30,7 @@ class MapData {
   MapData({
     this.rowCount = 17,
     this.columnCount = 10,
-    List<BlockData>? predefinedBlocks,
+    List<Block>? predefinedBlocks,
   }) {
     this.predefinedBlocks = predefinedBlocks ?? [];
 
@@ -40,5 +40,5 @@ class MapData {
   final int rowCount;
   final int columnCount;
   late final int blockCount;
-  late final List<BlockData> predefinedBlocks;
+  late final List<Block> predefinedBlocks;
 }

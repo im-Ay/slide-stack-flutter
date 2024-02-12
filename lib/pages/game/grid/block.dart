@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:slide_stack/gamelogic/grid.dart';
 
-class BlockWidget extends StatelessWidget {
+class BlockWidget extends ConsumerWidget {
   const BlockWidget({
     super.key,
     required this.index,
@@ -13,11 +15,15 @@ class BlockWidget extends StatelessWidget {
   final int rowIndex;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final block = ref.watch(gridBlocksProvider.select(
+      (blocks) => blocks[rowIndex][columnIndex],
+    ));
+
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Container(
-        color: Colors.black45,
+        color: block.color,
         child: Stack(
           children: [
             Align(
