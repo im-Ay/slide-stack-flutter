@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,6 +12,8 @@ class GameViewWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final tickState = ref.watch(gameTickStateProvider);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(
@@ -22,38 +25,49 @@ class GameViewWidget extends ConsumerWidget {
             const Expanded(
               child: GameGridWidget(),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    ref
-                        .read(activeShapeProvider.notifier)
-                        .setShape(LineShape());
-                    ref.read(gameTickProvider.notifier).start();
-                  },
-                  child: const Text("Start"),
-                ),
-                IconButton.filled(
-                  icon: const Icon(Icons.stop),
-                  onPressed: () {
-                    ref.read(gameTickProvider.notifier).cancel();
-                  },
-                ),
-                IconButton.filled(
-                  icon: const Icon(Icons.pause),
-                  onPressed: () {
-                    ref.read(gameTickProvider.notifier).pause();
-                  },
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(gameTickProvider.notifier).resume();
-                  },
-                  child: const Text("Resume"),
-                ),
-              ],
-            ),
+            (kDebugMode)
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: tickState == GameTickStates.inActive
+                            ? () {
+                                ref
+                                    .read(activeShapeProvider.notifier)
+                                    .setShape(LineShape());
+                                ref.read(gameTickProvider.notifier).start();
+                              }
+                            : null,
+                        child: const Text("Start"),
+                      ),
+                      IconButton.filled(
+                        icon: const Icon(Icons.stop),
+                        onPressed: tickState == GameTickStates.active ||
+                                tickState == GameTickStates.paused
+                            ? () {
+                                ref.read(gameTickProvider.notifier).cancel();
+                              }
+                            : null,
+                      ),
+                      IconButton.filled(
+                        icon: const Icon(Icons.pause),
+                        onPressed: tickState == GameTickStates.active
+                            ? () {
+                                ref.read(gameTickProvider.notifier).pause();
+                              }
+                            : null,
+                      ),
+                      ElevatedButton(
+                        onPressed: tickState == GameTickStates.paused
+                            ? () {
+                                ref.read(gameTickProvider.notifier).resume();
+                              }
+                            : null,
+                        child: const Text("Resume"),
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
             const Text(
               "Made by imAy",
               style: TextStyle(color: Colors.black),

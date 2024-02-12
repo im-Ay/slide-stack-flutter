@@ -10,6 +10,7 @@ part 'game_logic.g.dart';
 class GameLogic extends _$GameLogic {
   @override
   Object? build() {
+    ref.watch(gameTickStateProvider);
     ref.watch(gameTickProvider);
     ref.watch(gameMapProvider);
     ref.watch(activeShapeProvider);
