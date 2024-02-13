@@ -44,9 +44,11 @@ class MapBlocks extends _$MapBlocks {
     final newState = state.map((row) {
       return row.map((block) {
         var shapeIndex = shape.blocks.indexWhere((shapeBlock) =>
-            ((shapeBlock.rowIndex == 0 && block.rowIndex == 0) ||
-                shapeBlock.rowIndex == block.rowIndex + 1) &&
-            shapeBlock.columnIndex == block.columnIndex);
+            shapeBlock.rowIndex == block.rowIndex &&
+            shapeBlock.columnIndex == block.columnIndex &&
+            (shapeBlock.rowIndex == 0 ||
+                state[shapeBlock.rowIndex - 1][shapeBlock.columnIndex].state ==
+                    BlockState.on));
 
         if (shapeIndex != -1) {
           isSuccess = true;
