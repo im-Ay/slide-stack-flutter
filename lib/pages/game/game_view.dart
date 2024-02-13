@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:slide_stack/gamelogic/game_logic.dart';
 
 import 'package:slide_stack/gamelogic/game_tick.dart';
-import 'package:slide_stack/gamelogic/shape/active_shape.dart';
-import 'package:slide_stack/gamelogic/shape/shape.dart';
 import 'package:slide_stack/pages/game/grid/grid.dart';
 
 class GameViewWidget extends ConsumerWidget {
@@ -33,9 +32,8 @@ class GameViewWidget extends ConsumerWidget {
                         onPressed: tickState == GameTickStates.inActive
                             ? () {
                                 ref
-                                    .read(activeShapeProvider.notifier)
-                                    .setShape(LineShape());
-                                ref.read(gameTickProvider.notifier).start();
+                                    .read(gameLogicProvider.notifier)
+                                    .onStartPlaying();
                               }
                             : null,
                         child: const Text("Start"),

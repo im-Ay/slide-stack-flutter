@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:slide_stack/gamelogic/game_logic.dart';
 
 import 'package:slide_stack/gamelogic/map/map.dart';
-import 'package:slide_stack/gamelogic/map/map_blocks.dart';
 import 'package:slide_stack/pages/game/grid/block.dart';
 
 class GameGridWidget extends ConsumerWidget {
@@ -13,7 +13,8 @@ class GameGridWidget extends ConsumerWidget {
     final gameMap = ref.watch(gameMapProvider);
 
     return GestureDetector(
-      onTapDown: (details) => ref.read(mapBlocksProvider.notifier).stackShape(),
+      onTapDown: (details) =>
+          ref.read(gameLogicProvider.notifier).onGridTapDown(),
       child: Container(
         color: Colors.amber,
         child: GridView.builder(
