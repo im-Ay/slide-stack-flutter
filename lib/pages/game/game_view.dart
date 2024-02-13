@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:slide_stack/gamelogic/game_logic.dart';
 
 import 'package:slide_stack/gamelogic/game_tick.dart';
+import 'package:slide_stack/pages/game/game_score.dart';
 import 'package:slide_stack/pages/game/grid/grid.dart';
 
 class GameViewWidget extends ConsumerWidget {
@@ -21,6 +22,7 @@ class GameViewWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const GameScoreWidget(),
             const Expanded(
               child: GameGridWidget(),
             ),

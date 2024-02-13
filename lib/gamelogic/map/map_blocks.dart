@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:slide_stack/gamelogic/game_score.dart';
 import 'package:slide_stack/gamelogic/shape/active_shape.dart';
 import 'package:slide_stack/utils/exeptions.dart';
 
@@ -60,6 +61,7 @@ class MapBlocks extends _$MapBlocks {
     }).toList(growable: false);
 
     if (isSuccess) {
+      ref.read(gameScoreProvider.notifier).add(shape.value);
       state = newState;
     }
 

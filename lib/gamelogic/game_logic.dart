@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:slide_stack/gamelogic/game_score.dart';
 import 'package:slide_stack/gamelogic/game_state.dart';
 
 import 'package:slide_stack/gamelogic/game_tick.dart';
@@ -18,6 +19,9 @@ class GameLogic extends _$GameLogic {
     ref.listen(gameTickStateProvider, (previous, next) {});
     ref.listen(gameTickProvider, (previous, next) {});
     ref.listen(gameMapProvider, (previous, next) {});
+    ref.listen(gameScoreProvider, (previous, next) {
+      print("SCORE: $next");
+    });
 
     ref.listen(gameStateProvider, (previous, next) {
       print(next);
