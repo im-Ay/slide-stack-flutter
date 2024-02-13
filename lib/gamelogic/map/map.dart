@@ -1,6 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:slide_stack/gamelogic/game_state.dart';
 import 'package:slide_stack/gamelogic/shape/active_shape.dart';
 import 'package:slide_stack/gamelogic/shape/shape_factory.dart';
+import 'package:slide_stack/models/gamestate.dart';
 import 'package:slide_stack/models/shape.dart';
 
 import 'block.dart';
@@ -41,7 +43,7 @@ class GameMap extends _$GameMap {
 
   void activateNextShape() {
     if (state.shapes.isEmpty) {
-      ref.read(activeShapeProvider.notifier).clearShape();
+      ref.read(gameStateProvider.notifier).setState(GameStates.wone);
       return;
     }
     ref

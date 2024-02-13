@@ -24,6 +24,9 @@ class ActiveShape extends _$ActiveShape {
 
   clearShape() {
     state = null;
+    if (kDebugMode) {
+      print("ClearShape: $state");
+    }
   }
 
   _move(int tick) {
