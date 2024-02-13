@@ -70,9 +70,16 @@ class DynamicShape extends Shape {
     final int lastColumnIndex = mapBlocks[0].length - 1;
     var outOfMapBlockCount = 0;
     for (var block in newBlocks) {
-      if (block.columnIndex < 0 || block.columnIndex > lastColumnIndex) {
-        outOfMapBlockCount++;
-        break;
+      if (direction < 0) {
+        if (block.columnIndex < 0) {
+          outOfMapBlockCount++;
+          break;
+        }
+      } else if (direction > 0) {
+        if (block.columnIndex > lastColumnIndex) {
+          outOfMapBlockCount++;
+          break;
+        }
       }
     }
 
