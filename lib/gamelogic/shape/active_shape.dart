@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:slide_stack/gamelogic/game_tick.dart';
 import 'package:slide_stack/gamelogic/map/map_blocks.dart';
-import 'package:slide_stack/gamelogic/shape/shape.dart';
+import 'package:slide_stack/gamelogic/shape/dynamic_shape.dart';
 import 'package:slide_stack/utils/exeptions.dart';
 
 part 'active_shape.g.dart';

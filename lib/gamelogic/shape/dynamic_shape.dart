@@ -1,44 +1,25 @@
 import 'package:flutter/foundation.dart';
+import 'package:slide_stack/models/shape.dart';
 import 'package:slide_stack/utils/exeptions.dart';
 
 import '../map/block.dart';
 
 @immutable
-class Shape {
-  Shape({
-    required this.blocks,
-    int? value,
-  }) {
-    this.value = value ?? 100;
-  }
-
-  final List<Block> blocks;
-  late final int value;
-
-  Shape copyWith({
-    int? value,
-    List<Block>? blocks,
-  }) {
-    return Shape(
-      blocks: blocks ?? this.blocks,
-      value: value ?? this.value,
-    );
-  }
-}
-
-@immutable
 class DynamicShape extends Shape {
   DynamicShape({
     required super.blocks,
-    this.direction = 1,
-    this.moveInterval = 16,
-    super.value,
-  });
+    int? direction,
+    int? moveInterval,
+    int? value,
+  }) {
+    this.direction = direction ?? -1;
+    this.moveInterval = moveInterval ?? 16;
+    this.value = value ?? 50;
+  }
+  late final int direction;
+  late final int moveInterval;
+  late final int value;
 
-  final int direction;
-  final int moveInterval;
-
-  @override
   DynamicShape copyWith({
     int? value,
     int? direction,
@@ -105,43 +86,5 @@ class DynamicShape extends Shape {
     } catch (e) {
       rethrow;
     }
-  }
-}
-
-@immutable
-class LineShape extends DynamicShape {
-  LineShape({
-    final int length = 3,
-    List<Block>? blocks,
-    super.value,
-    super.direction,
-    super.moveInterval,
-  }) : super(
-          blocks: (blocks != null)
-              ? List.from(blocks, growable: false)
-              : List.generate(
-                  length,
-                  (index) => ShapeBlock(
-                    columnIndex: index,
-                    rowIndex: 0,
-                  ),
-                ),
-        );
-
-  @override
-  LineShape copyWith({
-    int? length,
-    int? value,
-    int? direction,
-    int? moveInterval,
-    List<Block>? blocks,
-  }) {
-    return LineShape(
-      length: blocks?.length ?? (length ?? this.blocks.length),
-      direction: direction ?? this.direction,
-      moveInterval: moveInterval ?? this.moveInterval,
-      value: value ?? this.value,
-      blocks: blocks,
-    );
   }
 }

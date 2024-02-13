@@ -20,10 +20,13 @@ class GameLogic extends _$GameLogic {
     ref.listen(
       activeShapeProvider,
       (previous, next) {
+        final gameTick = ref.read(gameTickProvider.notifier);
         if (next == null) {
+          if (gameTick.isActive()) {
+            gameTick.cancel();
+          }
           return;
         }
-        final gameTick = ref.read(gameTickProvider.notifier);
         if (!gameTick.isActive()) {
           gameTick.start();
         }
@@ -34,22 +37,19 @@ class GameLogic extends _$GameLogic {
   }
 
   onStartPlaying() {
-    if (ref.read(gameMapProvider.notifier).activateNextShape()) {
-      print("SUCCESS: Game Started!");
-    } else {
-      ref.read(gameTickProvider.notifier).cancel();
-      print("ERROR: No starting Shape!?");
-    }
+    ref.read(gameMapProvider.notifier).activateNextShape();
+    print("SUCCESS: Game Started!");
+    // ref.read(gameTickProvider.notifier).cancel();
+    // print("ERROR: No starting Shape!?");
   }
 
   onGridTapDown() {
     try {
       if (ref.read(mapBlocksProvider.notifier).stackShape()) {
-        if (!ref.read(gameMapProvider.notifier).activateNextShape()) {
-          ref.read(gameTickProvider.notifier).cancel();
-        }
+        ref.read(gameMapProvider.notifier).activateNextShape();
       } else {
-        ref.read(gameTickProvider.notifier).cancel();
+        ref.read(activeShapeProvider.notifier).clearShape();
+        // ref.read(gameTickProvider.notifier).cancel();
       }
     } on MissingActiveShapeException {
       if (kDebugMode) {

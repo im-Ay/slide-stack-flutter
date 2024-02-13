@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:slide_stack/gamelogic/shape/active_shape.dart';
-import 'package:slide_stack/gamelogic/shape/shape.dart';
+import 'package:slide_stack/gamelogic/shape/shape_factory.dart';
+import 'package:slide_stack/models/shape.dart';
 
 import 'block.dart';
 
@@ -11,7 +12,17 @@ class GameMap extends _$GameMap {
   @override
   MapData build() {
     // return MapData(shapes: List.empty());
-    return MapData(shapes: [LineShape(length: 1), LineShape()]);
+    return MapData(shapes: [
+      const LineShapeData(data: 1, rowPosition: 0, columnPosition: 10),
+      const LineShapeData(
+          data: 2, rowPosition: 1, columnPosition: 10, value: 100),
+      const LineShapeData(
+          data: 3,
+          rowPosition: 2,
+          columnPosition: -3,
+          direction: 1,
+          moveInterval: 10),
+    ]);
   }
 
   void setMap(String mapId) {
@@ -28,12 +39,14 @@ class GameMap extends _$GameMap {
     }
   }
 
-  bool activateNextShape() {
+  void activateNextShape() {
     if (state.shapes.isEmpty) {
-      return false;
+      ref.read(activeShapeProvider.notifier).clearShape();
+      return;
     }
-    ref.read(activeShapeProvider.notifier).setShape(state.shapes.removeAt(0));
-    return true;
+    ref
+        .read(activeShapeProvider.notifier)
+        .setShape(ShapeFactory.create(state.shapes.removeAt(0)));
   }
 }
 
@@ -51,7 +64,7 @@ class MapData {
 
   final int rowCount;
   final int columnCount;
-  final List<DynamicShape> shapes;
+  final List<ShapeData> shapes;
   late final int blockCount;
   late final List<Block> predefinedBlocks;
 }
