@@ -8,14 +8,6 @@ class GameScoreWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gameScore = ref.watch(gameScoreProvider);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "$gameScore",
-          style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-        )
-      ],
-    );
+    return Text("$gameScore");
   }
 }

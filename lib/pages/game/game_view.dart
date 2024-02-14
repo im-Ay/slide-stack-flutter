@@ -6,6 +6,7 @@ import 'package:slide_stack/gamelogic/game_logic.dart';
 import 'package:slide_stack/gamelogic/game_tick.dart';
 import 'package:slide_stack/pages/game/game_score.dart';
 import 'package:slide_stack/pages/game/grid/grid.dart';
+import 'package:slide_stack/widgets/bottom_bar.dart';
 
 class GameViewWidget extends ConsumerWidget {
   const GameViewWidget({super.key});
@@ -15,14 +16,15 @@ class GameViewWidget extends ConsumerWidget {
     final tickState = ref.watch(gameTickStateProvider);
 
     return Scaffold(
+      appBar: AppBar(
+        title: const GameScoreWidget(),
+      ),
       body: Padding(
-        padding: const EdgeInsets.only(
-            left: 14.0, right: 14.0, bottom: 32.0, top: 64.0),
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const GameScoreWidget(),
             const Expanded(
               child: GameGridWidget(),
             ),
@@ -68,10 +70,7 @@ class GameViewWidget extends ConsumerWidget {
                     ],
                   )
                 : const SizedBox(),
-            const Text(
-              "Made by imAy",
-              style: TextStyle(color: Colors.black),
-            ),
+            const BottomBar(),
           ],
         ),
       ),
