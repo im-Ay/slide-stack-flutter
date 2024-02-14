@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slide_stack/utils/themes/base_text_themes.dart';
 import 'package:slide_stack/widgets/bottom_bar.dart';
 
 class MapsPage extends StatelessWidget {
@@ -8,7 +9,10 @@ class MapsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Maps Page"),
+        title: Text(
+          "Maps",
+          style: getAppBarTitleTextStyle(context),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

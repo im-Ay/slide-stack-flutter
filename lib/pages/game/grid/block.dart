@@ -23,23 +23,28 @@ class BlockWidget extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Container(
-        color: block.color,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text('$columnIndex'),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Text('$rowIndex'),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Text('$index'),
-            ),
-          ],
-        ),
+        color: block.getColor(context),
+        child: false
+            ? Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('$columnIndex',
+                        style: const TextStyle(fontSize: 12.0)),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Text('$rowIndex',
+                        style: const TextStyle(fontSize: 12.0)),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child:
+                        Text('$index', style: const TextStyle(fontSize: 12.0)),
+                  ),
+                ],
+              )
+            : null,
       ),
     );
   }

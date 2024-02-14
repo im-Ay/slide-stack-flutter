@@ -6,12 +6,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const titleTextStyle = TextStyle(
-      letterSpacing: 4.0,
-      fontFamily: 'Monofett',
-      fontSize: 72.0,
-      height: 1.0,
-    );
+    final titleTextStyle = TextStyle(
+        letterSpacing: 4.0,
+        fontFamily: 'Monofett',
+        fontSize: 72.0,
+        height: 1.0,
+        color: Theme.of(context).colorScheme.primary);
+
     return Scaffold(
       body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -23,7 +24,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Column(
+                    Column(
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
@@ -35,7 +36,7 @@ class HomePage extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: 15.0),
+                            padding: const EdgeInsets.only(bottom: 15.0),
                             child: Text(
                               "Stack",
                               style: titleTextStyle,
@@ -46,7 +47,8 @@ class HomePage extends StatelessWidget {
                     ),
                     FilledButton(
                       onPressed: () => Navigator.pushNamed(context, "/maps"),
-                      child: const Text("PLAY"),
+                      child: const Text("PLAY",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),

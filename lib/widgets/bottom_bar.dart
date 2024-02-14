@@ -5,9 +5,9 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    return Text(
       "Made by imAy",
-      style: TextStyle(color: Colors.black),
+      style: Theme.of(context).textTheme.bodySmall,
     );
   }
 }

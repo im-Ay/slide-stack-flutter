@@ -12,23 +12,23 @@ class Block {
     required this.columnIndex,
     required this.rowIndex,
     this.state = BlockState.off,
-    this.colorDisabled = Colors.transparent,
-    this.colorOff = Colors.black45,
-    this.colorOn = Colors.white70,
+    this.colorDisabled,
+    this.colorOff,
+    this.colorOn,
   });
 
   final int columnIndex;
   final int rowIndex;
   final BlockState state;
-  final Color colorDisabled;
-  final Color colorOff;
-  final Color colorOn;
+  final Color? colorDisabled;
+  final Color? colorOff;
+  final Color? colorOn;
 
-  Color get color => state == BlockState.disabled
-      ? colorDisabled
+  Color getColor(BuildContext context) => state == BlockState.disabled
+      ? (colorDisabled ?? Colors.transparent)
       : state == BlockState.off
-          ? colorOff
-          : colorOn;
+          ? (colorOff ?? Theme.of(context).colorScheme.secondaryContainer)
+          : (colorOn ?? Theme.of(context).colorScheme.primary);
 
   factory Block.fromBlock(Block block) {
     return Block(
