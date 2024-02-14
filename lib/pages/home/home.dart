@@ -6,6 +6,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const titleTextStyle = TextStyle(
+      letterSpacing: 4.0,
+      fontFamily: 'Monofett',
+      fontSize: 72.0,
+      height: 1.0,
+    );
     return Scaffold(
       body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -17,15 +23,23 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    const Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 15.0),
+                        Align(
+                          alignment: Alignment.centerLeft,
                           child: Text(
-                            "Blocky Stack",
-                            style: TextStyle(
-                                fontSize: 36.0, fontWeight: FontWeight.bold),
+                            "Blocky",
+                            style: titleTextStyle,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 15.0),
+                            child: Text(
+                              "Stack",
+                              style: titleTextStyle,
+                            ),
                           ),
                         ),
                       ],

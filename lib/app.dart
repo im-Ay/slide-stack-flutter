@@ -9,6 +9,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Pixelify'),
       routes: {
         '/': (context) => const HomePage(),
         '/maps': (context) => const MapsPage(),
